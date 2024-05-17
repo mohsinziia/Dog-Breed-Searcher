@@ -1,34 +1,30 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addBreedData } from "../store/breedSlice";
-import Input from "./Input";
+import Select from "./Select";
 
 function Form() {
   const [breedOption, setBreedOption] = useState("germanshepherd");
   const { register, handleSubmit, setValue } = useForm();
   const dispatch = useDispatch();
-  const submit = async (data, e) => {
-    // const fetchURL = `https://dog.ceo/api/breeds/list/all`;
-    let imageURL;
-    let url;
-    const fetchURL = `https://dog.ceo/api/breed/${data.breedName}/images/random`;
+
+  async function getObjectURL(fetchURL) {
     try {
-      const response = await fetch(fetchURL);
-      if (response) {
-        console.log("Response exists, turning it into a blob...");
-        const blob = await response.blob();
-        if (blob) {
-          console.log("Blob exists, turning it into a URL...");
-          imageURL = URL.createObjectURL(blob);
-        }
-        const res = await fetch(imageURL);
-        url = (await res.json()).message;
-        console.log(url);
-      }
+      const responseJSON = await fetch(fetchURL);
+      const responseParsed = await responseJSON?.json();
+      const url = responseParsed?.message;
+      return url;
     } catch (error) {
-      console.log("Error while fetching");
+      console.log("Error while fetching: ", error);
     }
+    return undefined;
+  }
+
+  const submit = async (data, e) => {
+    const fetchURL = `https://dog.ceo/api/breed/${data.breedName}/images/random`;
+
+    const url = await getObjectURL(fetchURL);
     const breedInfo = {
       breedData: {
         name: data.breedName,
@@ -39,10 +35,9 @@ function Form() {
   };
 
   const handleChange = (e) => {
-    const newValue = e.target.value;
     e.preventDefault();
+    const newValue = e.target.value;
     setBreedOption(newValue);
-    console.log(newValue);
     setValue("breedName", newValue);
   };
 
@@ -50,7 +45,7 @@ function Form() {
     <>
       <form onSubmit={handleSubmit(submit)}>
         <label htmlFor="breedInput">Breed Name</label>
-        <Input
+        <Select
           {...register("breedName")}
           value={breedOption}
           onChange={(e) => {
