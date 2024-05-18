@@ -9,6 +9,7 @@ function Select({ value, onChange, ...props }, ref) {
   return (
     <>
       <select
+        className={`bg-slate-100 p-2 rounded-md hover:outline-dashed outline-1`}
         value={value}
         onChange={(event) => {
           onChange(event);

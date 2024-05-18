@@ -43,9 +43,12 @@ function Form() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(submit)}>
-        <label htmlFor="breedInput">Breed Name</label>
+      <form onSubmit={handleSubmit(submit)} className={`mb-4`}>
+        <label htmlFor="breedInput" className="mr-4">
+          Breed Name
+        </label>
         <Select
+          className={``}
           {...register("breedName")}
           value={breedOption}
           onChange={(e) => {
@@ -53,7 +56,12 @@ function Form() {
           }}
           id="breedInput"
         />
-        <button type="submit">Search</button>
+        <button
+          className={`w-28 ml-5 bg-red-800 p-2 hover:outline rounded-md outline-offset-2 outline-4 outline-pink-500`}
+          type="submit"
+        >
+          Search
+        </button>
       </form>
     </>
   );
