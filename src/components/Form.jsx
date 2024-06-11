@@ -56,10 +56,7 @@ function Form() {
           }}
           id="breedInput"
         />
-        <button
-          className={`w-28 ml-5 bg-red-800 p-2 hover:outline rounded-md outline-offset-2 outline-4 outline-pink-500`}
-          type="submit"
-        >
+        <button className={`submitBtn w-28 ml-5 p-2  rounded-md`} type="submit">
           Search
         </button>
       </form>

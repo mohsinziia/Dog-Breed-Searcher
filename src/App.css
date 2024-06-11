@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  --submitBtn-color: rgb(212, 102, 102);
 }
 
 .logo {
@@ -11,9 +12,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +25,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -39,4 +43,21 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.submitBtn {
+  color: black;
+  background-color: transparent;
+  outline: 3px solid var(--submitBtn-color);
+  transition: color .25s ease-in-out 0s;
+
+  transition: background-color .15s ease-in-out 0s;
+}
+
+.submitBtn:hover {
+  color: white;
+  opacity: .9;
+  background-color: var(--submitBtn-color);
+  transition: color .25s ease-in-out 0s;
+  transition: background-color .15s ease-in-out 0s;
 }
